@@ -1,0 +1,930 @@
+/* 
+---------------------
+| Krunker social hub v2
+| Author: -deusVult
+|
+| IGN: -deusVult
+| Github: https://github.com/deusVult69
+| Discord: hardypr0
+---------------------
+*/
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
+
+:root {
+	--colors-bg-primary: #80808030;
+	--colors-bg-secondary: #98989d30;
+
+	--colors-bg-active: #a8a8a860;
+	--colors-bg-hover: #99999960;
+
+	--colors-accent: #ffa500;
+	--colors-accent-grad: linear-gradient(to right, #e67e22, #f28c28, #ffa500);
+
+	--colors-text-primary: #ffffff90;
+	--colors-text-secondary: #636366;
+	--colors-border: rgba(142, 142, 147, 0.2);
+
+	--colors-popup-bg: #45454510;
+	--colors-popup-blur: blur(10px);
+
+	--colors-blur: blur(100px);
+	--colors-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+	--radius: 32px;
+	--radius-sm: 15px;
+
+	--anim-time: 0.4s;
+
+	--font: 'Unbounded', sans-serif;
+
+	/* change profile image */
+	--profile-image: url(https://i.ibb.co/SXYpkQ2G/kitten.jpg);
+
+	/* change background image */
+	/* --bg-image: url(https://i.ibb.co/QF4P36rK/material-style-8k-2880x1800.jpg); */
+	/* --bg-image: url(https://i.ibb.co/tPN7MsrL/Abstract-3-D-Graphics-psychedelic-nebula-space-d-6000x4000.webp); */
+	/* --bg-image: url(https://i.ibb.co/Z1tkBvSV/Pona6-ZIDin-E.jpg); */
+	/* --bg-image: url(https://i.ibb.co/hR1HfWMF/Adobe-Stock-632218531-scaled-680989135.jpg); */
+	--bg-image: url(https://i.ibb.co/XZXTLb3G/leather-jackets-anime-girl-on-bike-4k-jf-2560x1440-1775735645.jpg);
+
+	/* custom gradient for clan tag */
+	--clan-tag-color: linear-gradient(
+		90deg,
+		#ff0000,
+		#ff7300,
+		#fffb00,
+		#48ff00,
+		#00ffd5,
+		#002bff,
+		#7a00ff,
+		#ff00c8,
+		#ff0000
+	);
+
+	/* custom caption in navbar instead of krunker.io */
+	--custom-caption: 'MEOW:3';
+}
+
+/* font*/
+* {
+	font-family: var(--font);
+}
+
+/* clan tag highlight */
+a[href='/social.html?p=clan&q=M3OW'],
+a[href='/social.html?p=clan&q=M3OW'] > .clanNameFixed {
+	background: var(--clan-tag-color);
+	background-size: 400% 400%;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+	animation: rainbow 4s linear infinite;
+}
+
+@keyframes rainbow {
+	0% {
+		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 400% 50%;
+	}
+}
+/* /clan tag color */
+
+/* CUSTOM PROFILE PIC */
+/* main profile pic */
+#leftProfile {
+	position: relative;
+}
+#leftProfile::after {
+	content: '';
+
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 110px;
+	height: 110px;
+
+	background: var(--profile-image) center/cover no-repeat;
+	border-radius: 50%;
+}
+#socialPic {
+	visibility: hidden;
+}
+#socialFlag {
+	z-index: 1;
+}
+
+/* navBar profile pic */
+#profileInfo {
+	position: relative;
+}
+#profileInfo::after {
+	display: none; /* change to 'block' for custom icon */
+
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 64px;
+	height: 64px;
+
+	background: var(--profile-image) center / cover no-repeat;
+	border-radius: 50%;
+	border: 2px solid transparent;
+}
+#profileImg {
+	visibility: visible;
+	box-sizing: border-box;
+
+	border: 0 !important;
+	outline: 4px solid #8a8a8a !important;
+}
+/* /CUSTOM PROFILE PIC */
+
+/* remove Elements */
+#leftAHol,
+#rightAHol,
+#editrDB,
+#steamDB,
+#androidDB {
+	display: none !important;
+}
+/* /remove Elements */
+
+/* uibase */
+#uiBase {
+	backdrop-filter: blur(10px);
+}
+
+/* bg */
+#backgroundImage {
+	background-image: var(--bg-image) !important;
+	background-color: var(--colors-bg-secondary);
+	opacity: 1;
+}
+
+/* MAIN BLOCKS default styles*/
+#navBar,
+#chatScroller,
+#feedTabs,
+#postEntryC,
+.leaderNav2,
+.bigMenTabs,
+.socPost,
+#clanInfo .scrollItem,
+#clanRoster .scrollItem,
+.creationTabs,
+.profileTabs,
+#profileHolder .scrollItemNew,
+#profileHolder .pTabsContent .scrollItemNew,
+.offers,
+#chatBox,
+#genericPop,
+#searchInfo .scrollItem,
+#searchList .scrollItem,
+#itemsalesList .scrollItem,
+#badgeList .scrollItem {
+	background-color: var(--colors-bg-primary) !important ;
+	backdrop-filter: var(--colors-blur) !important;
+
+	border-radius: var(--radius);
+}
+/* /MAIN BLOCKS */
+
+/* NAVBAR */
+#navBar {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	bottom: 20px;
+	z-index: 1000;
+
+	box-sizing: border-box;
+
+	width: 90px;
+	/* width: 250px; */
+	height: calc(100% - 40px);
+
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	padding: 20px 10px;
+
+	transition: width 0.3s ease-in-out;
+}
+#navBar:hover {
+	width: 300px;
+}
+#navBar:hover #profileSearch {
+	width: 100%;
+}
+#navBar:hover #navButtons .menuBtn::after {
+	opacity: 1;
+	transform: translateX(0);
+}
+#navBar:hover #maps.menuBtn::after {
+	transform: translateX(56px) scale(1.25) !important;
+}
+#navBar:hover #profileName {
+	opacity: 1;
+	transform: translateX(0);
+}
+#profileInfo {
+	position: relative;
+	inset: 0;
+
+	display: flex;
+	flex-direction: column;
+
+	padding: 0 5px;
+}
+#profileName {
+	position: absolute;
+	top: 12px;
+	left: 80px;
+
+	max-width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	transform: translateX(-100px);
+	opacity: 0;
+	transition: opacity 0.3s linear, transform 0.3s ease-in-out;
+}
+
+/* login */
+#profileLogin {
+	position: relative;
+
+	box-sizing: border-box;
+	width: 60px;
+	height: 60px;
+
+	font-size: 0 !important;
+
+	border-radius: 50%;
+
+	border: 0;
+}
+#profileLogin:hover {
+	border: 0;
+}
+#profileLogin::after {
+	content: '';
+
+	position: absolute;
+	inset: 0;
+
+	/* background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none"><path d="M14.9453 1.25C13.5778 1.24998 12.4754 1.24996 11.6085 1.36652C10.7084 1.48754 9.95048 1.74643 9.34857 2.34835C8.82363 2.87328 8.55839 3.51836 8.41916 4.27635C8.28387 5.01291 8.25799 5.9143 8.25196 6.99583C8.24966 7.41003 8.58357 7.74768 8.99778 7.74999C9.41199 7.7523 9.74964 7.41838 9.75194 7.00418C9.75803 5.91068 9.78643 5.1356 9.89448 4.54735C9.99859 3.98054 10.1658 3.65246 10.4092 3.40901C10.686 3.13225 11.0746 2.9518 11.8083 2.85315C12.5637 2.75159 13.5648 2.75 15.0002 2.75H16.0002C17.4356 2.75 18.4367 2.75159 19.1921 2.85315C19.9259 2.9518 20.3144 3.13225 20.5912 3.40901C20.868 3.68577 21.0484 4.07435 21.1471 4.80812C21.2486 5.56347 21.2502 6.56459 21.2502 8V16C21.2502 17.4354 21.2486 18.4365 21.1471 19.1919C21.0484 19.9257 20.868 20.3142 20.5912 20.591C20.3144 20.8678 19.9259 21.0482 19.1921 21.1469C18.4367 21.2484 17.4356 21.25 16.0002 21.25H15.0002C13.5648 21.25 12.5637 21.2484 11.8083 21.1469C11.0746 21.0482 10.686 20.8678 10.4092 20.591C10.1658 20.3475 9.99859 20.0195 9.89448 19.4527C9.78643 18.8644 9.75803 18.0893 9.75194 16.9958C9.74964 16.5816 9.41199 16.2477 8.99778 16.25C8.58357 16.2523 8.24966 16.59 8.25196 17.0042C8.25799 18.0857 8.28387 18.9871 8.41916 19.7236C8.55839 20.4816 8.82363 21.1267 9.34857 21.6517C9.95048 22.2536 10.7084 22.5125 11.6085 22.6335C12.4754 22.75 13.5778 22.75 14.9453 22.75H16.0551C17.4227 22.75 18.525 22.75 19.392 22.6335C20.2921 22.5125 21.0499 22.2536 21.6519 21.6517C22.2538 21.0497 22.5127 20.2919 22.6337 19.3918C22.7503 18.5248 22.7502 17.4225 22.7502 16.0549V7.94513C22.7502 6.57754 22.7503 5.47522 22.6337 4.60825C22.5127 3.70814 22.2538 2.95027 21.6519 2.34835C21.0499 1.74643 20.2921 1.48754 19.392 1.36652C18.525 1.24996 17.4227 1.24998 16.0551 1.25H14.9453Z" fill="%23ffffff"/><path d="M2.00098 11.249C1.58676 11.249 1.25098 11.5848 1.25098 11.999C1.25098 12.4132 1.58676 12.749 2.00098 12.749L13.9735 12.749L12.0129 14.4296C11.6984 14.6991 11.662 15.1726 11.9315 15.4871C12.2011 15.8016 12.6746 15.838 12.9891 15.5685L16.4891 12.5685C16.6553 12.426 16.751 12.218 16.751 11.999C16.751 11.7801 16.6553 11.5721 16.4891 11.4296L12.9891 8.42958C12.6746 8.16002 12.2011 8.19644 11.9315 8.51093C11.662 8.82543 11.6984 9.2989 12.0129 9.56847L13.9735 11.249L2.00098 11.249Z" fill="%23ffffff"/></svg>'); */
+	background-image: url('data:image/svg+xml,<%3Fxml version="1.0" encoding="utf-8"%3F><svg fill="%23ffffff" width="800px" height="800px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><title>login</title><path d="M12.219 26.156h6.094c1.156 0 2.125-0.406 2.875-1.188 0.75-0.75 1.219-1.75 1.219-2.875v-12.219c0-1.125-0.469-2.125-1.219-2.875s-1.75-1.188-2.875-1.188h-6.094v2.563h6.094c0.875 0 1.531 0.656 1.531 1.5v12.219c0 0.844-0.656 1.531-1.531 1.531h-6.094v2.531zM0 13.563v4.875c0 0.563 0.469 1.031 1.031 1.031h5.688v3.844c0 0.344 0.156 0.625 0.469 0.781 0.125 0.031 0.281 0.031 0.344 0.031 0.219 0 0.406-0.063 0.563-0.219l7.344-7.344c0.281-0.281 0.25-0.844 0-1.156l-7.344-7.313c-0.25-0.25-0.563-0.281-0.906-0.188-0.313 0.156-0.469 0.406-0.469 0.75v3.875h-5.688c-0.563 0-1.031 0.469-1.031 1.031z"></path></svg>');
+	background-size: 80%;
+	background-position: top 50% right -1px;
+	background-repeat: no-repeat;
+}
+
+/* login button */
+#profileSearch {
+	position: relative;
+
+	align-self: center;
+
+	width: 60px;
+	height: 60px;
+
+	margin-top: 20px;
+	margin-left: 0;
+
+	font-size: 18px;
+
+	border-radius: 30px;
+	overflow: hidden;
+
+	transition: width 0.3s ease-in-out;
+}
+#searchPInput {
+	width: 100%;
+	height: 100%;
+
+	padding: 6px 65px 6px 10px !important;
+
+	font-size: inherit;
+
+	border-radius: 30px;
+}
+#searchBtn {
+	position: absolute;
+	right: 0;
+	top: 0;
+
+	width: 60px;
+	height: 60px;
+
+	padding: 0 !important;
+	margin: 0 !important;
+
+	font-size: 0;
+
+	background-color: var(--colors-accent);
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+
+	transition: opacity 0.3s linear;
+}
+#searchBtn:hover {
+	opacity: 0.4;
+	background-color: var(--colors-accent);
+}
+#searchBtn::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+	height: 80%;
+	/* search icon */
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+#navButtons {
+	position: static;
+	transform: translate(0, 0);
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 20px;
+
+	padding: 0 5px;
+}
+#navButtons .menuBtn {
+	position: relative;
+
+	width: 100%;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 30px;
+
+	font-size: 60px !important;
+
+	margin: 0 !important;
+	transition: color 0.3s linear;
+}
+#navButtons .menuBtn:hover,
+#navButtons .menuBtn[style*='opacity: 0.5'] {
+	color: var(--colors-accent);
+	opacity: 1 !important;
+	transform: none;
+}
+#navButtons .menuBtn:hover::after {
+	color: var(--colors-accent);
+}
+#navButtons .menuBtn::after {
+	font-family: var(--font);
+	font-size: 30px;
+	text-transform: uppercase;
+	transform: translateX(-100px);
+	opacity: 0;
+
+	transition: transform 0.3s ease-in-out, color 0.3s linear, opacity 0.3s linear;
+}
+
+#maps {
+	transform: scale(0.8) !important;
+	transform-origin: left center;
+}
+#maps.menuBtn::after {
+	transform: scale(1.25) translateX(-100px) !important;
+}
+
+/* buttons */
+#feed::after {
+	content: 'Feed';
+}
+#market::after {
+	content: 'Market';
+}
+#leaders::after {
+	content: 'Stats';
+}
+#maps::after {
+	content: 'Maps';
+}
+#mods::after {
+	content: 'Mods';
+}
+#items::after {
+	content: 'Items';
+}
+
+#navTitle {
+	position: static;
+	order: 3;
+
+	display: flex;
+	align-items: center;
+
+	margin-top: auto;
+	padding: 0 5px;
+
+	transform: translate(0, 0);
+}
+#navTitle div:nth-last-of-type(2) {
+	font-size: 0;
+}
+
+#navTitle div.material-icons.terms {
+	font-size: 60px !important;
+	margin-top: 0 !important;
+	transition: color 0.3s linear;
+}
+#navTitle div.material-icons.terms:hover {
+	color: var(--colors-accent) !important;
+	text-decoration: none;
+}
+#hubBox {
+	visibility: hidden;
+}
+
+/* terms remove */
+.terms {
+	display: none;
+}
+
+/* bm glitch */
+.glitch:before,
+.glitch:after {
+	content: var(--custom-caption);
+	top: 0;
+	left: 55px;
+}
+/* /bm glitch */
+/* /NAVBAR */
+
+/* CHAT */
+#chatScroller {
+	top: 20px;
+	left: auto;
+	right: 20px;
+	bottom: 20px;
+
+	width: 90px;
+}
+
+/* dialogs */
+#postTopBar {
+	position: relative;
+
+	display: flex;
+	align-items: center;
+}
+.chatBlobIcn {
+	border-radius: 20px !important;
+	transition: border-color 0.3s linear, transform 0.3s linear;
+}
+.chatBlobIcn:hover {
+	border-color: var(--colors-accent);
+}
+.chatBlobImg {
+	border-radius: 20px !important;
+
+	transition: border-color 0.3s linear, transform 0.3s linear;
+}
+.chatBlobImg:hover {
+	border-color: var(--colors-accent);
+}
+#chatBoxButton {
+	background-color: var(--colors-accent);
+}
+.chatItemH {
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+}
+/* /CHAT */
+
+/* content holders offset*/
+#feedHolder,
+#marketHolder,
+#leaderHolder,
+#mapsHolder,
+#modsHolder,
+#itemsHolder,
+#profileHolder,
+#clanHolder,
+#chatBox,
+#searchHolder,
+#itemsalesHolder,
+#badgeHolder {
+	top: 20px !important;
+	bottom: 20px !important;
+}
+/* /content holders offset*/
+
+/* ITEMS */
+.leaderNav {
+	margin-top: 0;
+}
+/* /ITEMS  */
+
+/* tabs margin fix */
+#mapsHolder div:first-child,
+#mapsHolder .bigMenTabs,
+#modsHolder div:first-child,
+#modsHolder .bigMenTabs {
+	margin-top: 0 !important;
+}
+
+/* tabs */
+#feedTabs,
+.bigMenTabs,
+.profileTabs,
+.creationTabs,
+.menuTabsNew {
+	overflow: hidden;
+}
+.feedTab,
+.bigMenTab,
+.profileTab,
+.creationTab,
+.menuTabNew {
+	transition: background-color var(--anim-time) linear,
+		color var(--anim-time) linear;
+}
+.feedTab:hover,
+.bigMenTab:hover,
+.profileTab:hover,
+.creationTab:hover,
+.menuTabNew:hover {
+	color: var(--colors-accent);
+	border-bottom: 0;
+	background-color: var(--colors-bg-hover);
+	box-shadow: none;
+}
+.feedTab.feedTabA,
+.bigMenTab.bigMenTabA,
+.profileTab.pTabA,
+.creationTab.creationTabA,
+.menuTabNew.tabANew {
+	color: var(--colors-accent);
+	border-bottom: 0;
+	background-color: var(--colors-bg-secondary);
+	box-shadow: none;
+}
+.feedTabIcon {
+	transition: color var(--anim-time) linear;
+}
+.feedTab:hover .feedTabIcon,
+.feedTab.feedTabA .feedTabIcon {
+	color: var(--colors-accent);
+}
+/* /tabs */
+
+/* POSTS */
+#postHolder {
+	column-count: 2;
+	column-gap: 15px;
+}
+.socPost {
+	break-inside: avoid;
+	margin-bottom: 15px;
+}
+.socPost .imgTextO {
+	white-space: nowrap;
+}
+#postButton {
+	background-color: var(--colors-accent);
+
+	transition: opacity 0.3s linear;
+}
+/* /POSTS */
+
+/* players list fix */
+#leaderList .scrollItem div:not(.clanNameFixed),
+#searchList .scrollItem div,
+#clanRoster .scrollItem div,
+#iTabContent_owners div {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	color: var(--colors-text-primary) !important;
+}
+#leaderList .scrollItem div i,
+#searchList .scrollItem div i,
+#clanRoster .scrollItem div i,
+#iTabContent_owners div i {
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+}
+#leaderList .scrollItem .floatR,
+#searchList .scrollItem .floatR,
+#clanRoster .scrollItem .floatR {
+	display: flex;
+	align-items: center;
+}
+
+#leaderList .scrollItem div div:last-child,
+#searchList .scrollItem div div:last-child,
+#clanRoster .scrollItem div div:last-child,
+#clanRoster .scrollItem div span:last-child,
+#iTabContent_owners div:last-child {
+	margin-left: auto;
+}
+/* /players list fix */
+
+/* LEADERS */
+.leaderNav2 {
+	margin-top: 0;
+	margin-bottom: 15px;
+	padding-left: 0;
+	padding-right: 0;
+
+	clip-path: none;
+}
+#leaderList .scrollItem {
+	height: calc(100% - 100px) !important;
+}
+#leaderList .scrollItem {
+	background-color: var(--colors-bg-primary);
+}
+/* /LEADERS */
+
+/* MARKET */
+.marketCard {
+	background-color: var(--colors-bg-secondary);
+	border-radius: var(--radius-sm);
+}
+.marketPrice {
+	color: var(--colors-accent);
+}
+.cardActions {
+	background-color: #00000090 !important;
+}
+
+#marketSearchB {
+	background-image: var(--colors-accent-grad) !important;
+}
+
+#itemsListNav > select,
+#itemsListNav > input,
+#itemCount {
+	background-color: var(--colors-bg-secondary);
+	color: var(--colors-accent);
+}
+#itemsListNav > input::placeholder {
+	color: var(--colors-accent);
+}
+.menuTabNew {
+	line-height: 40px;
+}
+#invSortB {
+	background-color: var(--colors-accent) !important;
+}
+/* /MARKET */
+
+/* PROFILE */
+/* profile tabs */
+.profileNav {
+	margin-top: -35px !important;
+}
+.profileTabs {
+	width: 100% !important;
+	margin-left: 0 !important;
+	margin-bottom: 0 !important;
+}
+.profileTab {
+	border: 0 !important;
+}
+
+/* creation tabs */
+.creationTabs {
+	box-shadow: none !important;
+}
+.creationTab {
+	border-bottom: 0 !important;
+}
+
+/* profile blocks shadow remove */
+.scrollItemNew {
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+/* stats */
+.xpBar {
+	height: 30px;
+	padding: 0;
+
+	border-radius: var(--radius);
+	overflow: hidden;
+}
+.xpBarB {
+	background-image: var(--colors-accent-grad);
+}
+.xpBarV {
+	top: 50%;
+	transform: translateY(-50%);
+
+	height: auto;
+}
+.pSt strong {
+	color: var(--colors-accent);
+}
+#followerC,
+#followC {
+	color: var(--colors-accent);
+}
+.cardEst {
+	color: var(--colors-accent);
+}
+/* /PROFILE */
+
+/* PLAYERS SEARCH */
+#searchInfo div {
+	color: var(--colors-accent);
+}
+/* /PLAYERS SEARCH */
+
+/* ITEMS SEARCH */
+#itemsalesList .buyBtn {
+	background-color: var(--colors-accent);
+}
+.smDetails span {
+	color: var(--colors-accent) !important;
+}
+.smDetails span[style='color:#787878'] {
+	color: var(--colors-text-primary) !important;
+}
+/* /ITEMS SEARCH */
+
+/* TOOLTIP */
+.tooltip2 {
+	left: auto !important;
+	right: 120px;
+
+	margin-top: -52px;
+
+	background-color: var(--colors-bg-primary) !important ;
+	backdrop-filter: var(--colors-blur) !important;
+
+	border-radius: var(--radius-sm);
+}
+/* /TOOLTIP */
+
+/* POPUPS */
+#popupHolder {
+	top: 0;
+	left: 0;
+}
+#popupBack {
+	background-color: var(--colors-popup-bg);
+	backdrop-filter: var(--colors-popup-blur);
+}
+.setPopHeader {
+	background-color: transparent;
+	box-shadow: none;
+}
+
+#popupHolder {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 10000;
+}
+
+#popupHolder[style*='display: block'] {
+	animation: fadeIn 0.3s ease forwards;
+}
+
+#popupHolder[style*='display: none'] {
+	animation: fadeOut 0.3s ease forwards;
+}
+
+#genericPop,
+#itemViewPop {
+	top: 50%;
+
+	opacity: 0;
+	transform: translate(-50%, -50%);
+}
+
+#genericPop[style*='display: block'],
+#itemViewPop[style*='display: block'] {
+	animation: popIn 0.3s ease 0.2s forwards;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes popIn {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -40%);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%);
+	}
+}
+
+/* popup trades */
+.estOfferVal span {
+	color: var(--colors-accent) !important;
+}
+
+/* popup settings */
+.settName,
+.settNameSmall {
+	margin-bottom: 14px;
+}
+.sliderVal {
+	background-color: var(--colors-accent);
+}
+/* applies to all sliders */
+input:checked + .slider {
+	background-color: var(--colors-accent);
+}
+input:focus + .slider {
+	box-shadow: 0 0 1px var(--colors-accent);
+}
+/* range slider thumb */
+.sliderM::-webkit-slider-thumb {
+	background: var(--colors-accent);
+}
+.sliderM::-moz-range-thumb {
+	background: var(--colors-accent);
+}
+.slidecontainer {
+	margin-top: 0 !important;
+}
+/* image collection open button */
+.openCollection {
+	background-color: var(--colors-accent) !important;
+}
+
+/* popup item view */
+#itemInfoBtn {
+	background-color: var(--colors-accent);
+	transition: opacity 0.3s linear;
+}
+#itemInfoBtn:hover {
+	background-color: var(--colors-accent);
+	opacity: 0.7;
+}
+/* /POPUPS */
+
+/* loading spinner */
+#loadMessage {
+}
+/* /loading spinner */
+
+/* scrollbar */
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	background-color: var(--colors-bg-primary);
+}
+
+::-webkit-scrollbar {
+	width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: var(--colors-accent-grad);
+	-webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.6);
+	box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.6);
+}
+
+/* PC7 */
+#badgeList .scrollItem {
+	max-height: calc(100% - 200px);
+}
