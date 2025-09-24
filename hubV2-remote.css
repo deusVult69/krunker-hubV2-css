@@ -1,0 +1,63 @@
+/* 
+---------------------
+| Krunker social hub v2
+| Author: -deusVult
+|
+| IGN: -deusVult
+| Github: https://github.com/deusVult69
+| Discord: hardypr0
+---------------------
+*/
+
+@import url(https://deusvult69.github.io/krunker-hubV2-css/hubV2.css);
+
+:root {
+	--colors-bg-primary: #80808030;
+	--colors-bg-secondary: #98989d30;
+
+	--colors-bg-active: #a8a8a860;
+	--colors-bg-hover: #99999960;
+
+	--colors-accent: #ffa500;
+	--colors-accent-grad: linear-gradient(to right, #e67e22, #f28c28, #ffa500);
+
+	--colors-text-primary: #ffffff90;
+	--colors-text-secondary: #636366;
+	--colors-border: rgba(142, 142, 147, 0.2);
+
+	--colors-popup-bg: #45454510;
+	--colors-popup-blur: blur(10px);
+
+	--colors-blur: blur(100px);
+	--colors-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+	--radius: 32px;
+	--radius-sm: 15px;
+
+	--anim-time: 0.4s;
+
+	--font: 'Unbounded', sans-serif;
+
+	/* change profile image */
+	--profile-image: url(https://i.ibb.co/SXYpkQ2G/kitten.jpg);
+
+	/* change background image */
+	--bg-image: url(https://i.ibb.co/XZXTLb3G/leather-jackets-anime-girl-on-bike-4k-jf-2560x1440-1775735645.jpg);
+
+	/* custom gradient for clan tag */
+	--clan-tag-color: linear-gradient(
+		90deg,
+		#ff0000,
+		#ff7300,
+		#fffb00,
+		#48ff00,
+		#00ffd5,
+		#002bff,
+		#7a00ff,
+		#ff00c8,
+		#ff0000
+	);
+
+	/* custom caption in navbar instead of krunker.io */
+	--custom-caption: 'MEOW:3';
+}
