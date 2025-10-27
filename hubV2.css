@@ -59,6 +59,11 @@
 
 	/* custom caption in navbar instead of krunker.io */
 	--custom-caption: 'MEOW:3';
+
+	/* author */
+	--author: 'css by -deusVult';
+	/* 0 to hide */
+	--author-visibility: 1;
 }
 
 /* font*/
@@ -183,7 +188,8 @@ a[href='/social.html?p=clan&q=M3OW'] > .clanNameFixed {
 #searchInfo .scrollItem,
 #searchList .scrollItem,
 #itemsalesList .scrollItem,
-#badgeList .scrollItem {
+#badgeList .scrollItem,
+#singlePost {
 	background-color: var(--colors-bg-primary) !important ;
 	backdrop-filter: var(--colors-blur) !important;
 
@@ -923,4 +929,17 @@ input:focus + .slider {
 /* PC7 */
 #badgeList .scrollItem {
 	max-height: calc(100% - 200px);
+}
+
+/* author */
+#uiBase::before {
+	content: var(--author);
+	position: absolute;
+	top: 5px;
+	right: 170px;
+
+	color: var(--colors-text-primary);
+	font-size: 1.5rem;
+
+	opacity: var(--author-visibility);
 }
