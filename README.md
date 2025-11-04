@@ -2,7 +2,12 @@
 
 Custom social hub css for krunker.io game. sidebar menu.
 
-> Compatible with the latest Krunker version.
+> Compatible with the latest Krunker version.  
+> Best ux available on browser or clients with webview2 support
+
+## Youtube overview
+
+[![HubV2 preview](https://github.com/deusVult69/krunker-hubV2-css/blob/main/screenshots/hubv2-preview.png?raw=true)](https://youtu.be/ndeRMFUH_xE 'HubV2 preview')
 
 ## Interface Screenshots
 
